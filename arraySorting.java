@@ -1,5 +1,6 @@
 class arraySorting {
 
+    // bubble sort
     public static void bubbleSort(int arr[]) {
         int n = arr.length;
 
@@ -18,6 +19,7 @@ class arraySorting {
         }
     }
 
+    // sselection sort
     public static void selectionSort(int arr[]) {
         int n = arr.length;
 
