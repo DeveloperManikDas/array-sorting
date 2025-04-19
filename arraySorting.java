@@ -60,11 +60,56 @@ class arraySorting {
         }
     }
 
+    // Function to perform counting sort
+    public static void countingSort(int[] arr) {
+        int n = arr.length;
+
+        if (n == 0)
+            return;
+
+        // Step 1: Find the maximum value
+        int max = arr[0];
+        for (int i = 1; i < n; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        // Step 2: Create count array and store the frequency of each element
+        int[] count = new int[max + 1];
+        for (int i = 0; i < n; i++) {
+            count[arr[i]]++;
+        }
+
+        // Step 3: Modify count array by adding previous counts (cumulative count)
+        for (int i = 1; i <= max; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // Step 4: Build the output array
+        int[] output = new int[n];
+        for (int i = n - 1; i >= 0; i--) {
+            output[count[arr[i]] - 1] = arr[i];
+            count[arr[i]]--;
+        }
+
+        // Step 5: Copy output back to original array
+        for (int i = 0; i < n; i++) {
+            arr[i] = output[i];
+        }
+
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
     public static void main(String arg[]) {
         int arr[] = { 3, 1, 5, 4, 2 };
         // bubbleSort(arr);
         // selectionSort(arr);
-        insertionSort(arr);
+        // insertionSort(arr);
+        countingSort(arr);
 
     }
 }
