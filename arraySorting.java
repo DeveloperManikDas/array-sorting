@@ -1,53 +1,61 @@
-class arraySorting {
+public class ArraySorting {
 
-    // bubble sort
-    public static void bubbleSort(int arr[]) {
+    // Bubble Sort
+    public static void bubbleSort(int[] arr) {
         int n = arr.length;
 
         for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < (n - 1 - i); j++) {
+            for (int j = 0; j < n - 1 - i; j++) {
                 if (arr[j + 1] < arr[j]) {
+                    // Swap arr[j] and arr[j + 1]
                     int temp = arr[j + 1];
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
                 }
             }
         }
-        System.out.print("Sorted array is ");
+
+        System.out.print("Bubble Sorted array: ");
         for (int i : arr) {
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
-    // sselection sort
-    public static void selectionSort(int arr[]) {
+    // Selection Sort
+    public static void selectionSort(int[] arr) {
         int n = arr.length;
 
-        int smallest = arr[0];
-
         for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < (n - i); j++) {
-                if (arr[j] < smallest) {
-                    smallest = arr[j];
+            int minIndex = i;
+
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
                 }
             }
+
+            // Swap arr[i] and arr[minIndex]
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
         }
-        System.out.print("Sorted array is ");
+
+        System.out.print("Selection Sorted array: ");
         for (int i : arr) {
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
-    // Function to perform insertion sort
+    // Insertion Sort
     public static void insertionSort(int[] arr) {
         int n = arr.length;
 
         for (int i = 1; i < n; i++) {
-            int key = arr[i]; // element to be inserted
+            int key = arr[i];
             int j = i - 1;
 
-            // Shift elements of arr[0..i-1], that are greater than key,
-            // to one position ahead of their current position
             while (j >= 0 && arr[j] > key) {
                 arr[j + 1] = arr[j];
                 j = j - 1;
@@ -55,19 +63,20 @@ class arraySorting {
 
             arr[j + 1] = key;
         }
+
+        System.out.print("Insertion Sorted array: ");
         for (int i : arr) {
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
-    // Function to perform counting sort
+    // Counting Sort
     public static void countingSort(int[] arr) {
         int n = arr.length;
 
-        if (n == 0)
-            return;
+        if (n == 0) return;
 
-        // Step 1: Find the maximum value
         int max = arr[0];
         for (int i = 1; i < n; i++) {
             if (arr[i] > max) {
@@ -75,41 +84,41 @@ class arraySorting {
             }
         }
 
-        // Step 2: Create count array and store the frequency of each element
         int[] count = new int[max + 1];
+
         for (int i = 0; i < n; i++) {
             count[arr[i]]++;
         }
 
-        // Step 3: Modify count array by adding previous counts (cumulative count)
         for (int i = 1; i <= max; i++) {
             count[i] += count[i - 1];
         }
 
-        // Step 4: Build the output array
         int[] output = new int[n];
+
         for (int i = n - 1; i >= 0; i--) {
             output[count[arr[i]] - 1] = arr[i];
             count[arr[i]]--;
         }
 
-        // Step 5: Copy output back to original array
         for (int i = 0; i < n; i++) {
             arr[i] = output[i];
         }
 
+        System.out.print("Counting Sorted array: ");
         for (int num : arr) {
             System.out.print(num + " ");
         }
         System.out.println();
     }
 
-    public static void main(String arg[]) {
-        int arr[] = { 3, 1, 5, 4, 2 };
+    public static void main(String[] args) {
+        int[] arr = { 3, 1, 5, 4, 2 };
+
+        // Uncomment one of the sorting methods to test
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
         countingSort(arr);
-
     }
 }
