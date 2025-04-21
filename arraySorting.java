@@ -1,4 +1,4 @@
-public class ArraySorting {
+public class arraySorting {
 
     // Bubble Sort
     public static void bubbleSort(int[] arr) {
@@ -75,7 +75,8 @@ public class ArraySorting {
     public static void countingSort(int[] arr) {
         int n = arr.length;
 
-        if (n == 0) return;
+        if (n == 0)
+            return;
 
         int max = arr[0];
         for (int i = 1; i < n; i++) {
@@ -112,13 +113,35 @@ public class ArraySorting {
         System.out.println();
     }
 
+    public static void moveZeroes(int[] nums) {
+        int lastNonZeroIndex = 0;
+
+        // First pass: Move all non-zero elements to the front
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[lastNonZeroIndex] = nums[i];
+                lastNonZeroIndex++;
+            }
+        }
+
+        // Second pass: Fill the remaining positions with 0s
+        for (int i = lastNonZeroIndex; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+
+        for (int i : nums) {
+            System.out.print(i);
+        }
+    }
+
     public static void main(String[] args) {
-        int[] arr = { 3, 1, 5, 4, 2 };
+        int[] arr = { 3, 0, 1, 5, 4, 2 };
 
         // Uncomment one of the sorting methods to test
         // bubbleSort(arr);
         // selectionSort(arr);
         // insertionSort(arr);
-        countingSort(arr);
+        // countingSort(arr);
+        moveZeroes(arr);
     }
 }
